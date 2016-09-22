@@ -1,10 +1,8 @@
 require "rack/healthcheck/actions/base"
 
-module Rack
-  module Healthcheck
-    module Actions
-      class Complete < Base
-      end
+module Rack::Healthcheck::Actions
+  class Complete < Base
+    def get
     end
   end
 end
