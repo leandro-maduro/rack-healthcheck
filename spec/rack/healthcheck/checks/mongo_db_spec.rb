@@ -20,8 +20,8 @@ describe Rack::Healthcheck::Checks::MongoDb do
 
     describe "when database is up" do
       let(:connection) { double }
-      
-      it "returns true" do
+
+      it "sets status to true" do
         allow(connection).to receive(:command).and_return({"db" => "test"})
         allow(Mongoid::Sessions).to receive(:with_name).with(any_args).and_return(connection)
         run_it
@@ -31,7 +31,7 @@ describe Rack::Healthcheck::Checks::MongoDb do
     end
 
     describe "when database is down" do
-      it "returns false" do
+      it "sets status to false" do
         allow(Mongoid::Sessions).to receive(:with_name).and_raise(Exception)
         run_it
 

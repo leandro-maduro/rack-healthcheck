@@ -19,7 +19,7 @@ describe Rack::Healthcheck::Checks::ActiveRecord do
     subject(:run_it) { active_record_check.run }
 
     describe "when database is up" do
-      it "returns true" do
+      it "sets status to true" do
         allow(ActiveRecord::Migrator).to receive(:current_version).and_return("1")
         run_it
 
@@ -28,7 +28,7 @@ describe Rack::Healthcheck::Checks::ActiveRecord do
     end
 
     describe "when database is down" do
-      it "returns false" do
+      it "sets status to false" do
         allow(ActiveRecord::Migrator).to receive(:current_version).and_raise(Exception)
         run_it
 
