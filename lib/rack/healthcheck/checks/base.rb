@@ -1,12 +1,17 @@
 module Rack::Healthcheck::Checks
   class Base
+    class InvalidType < Exception; end;
+
     attr_accessor :name, :optional, :url
     attr_reader :type, :status, :elapsed_time
 
-    def initialize(name, optional = false, url = nil)
+    def initialize(name, type, optional = false, url = nil)
+      raise InvalidType.new("Type must be one of these options #{Rack::Healthcheck::Type::ALL.join(", ")}") unless Rack::Healthcheck::Type::ALL.include?(type)
+
       @name = name
       @optional = optional
       @url = url
+      @type = type
     end
 
     def run

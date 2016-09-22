@@ -16,8 +16,7 @@ module Rack::Healthcheck::Checks
     # }
     # optional = true
     def initialize(name, config, optional = false)
-      super(name, optional, config[:url])
-      @type   = Rack::Healthcheck::Type::CACHE
+      super(name, Rack::Healthcheck::Type::CACHE, optional, config[:url])
       @config = config
     end
 

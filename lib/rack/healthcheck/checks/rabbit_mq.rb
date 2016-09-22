@@ -18,8 +18,7 @@ module Rack::Healthcheck::Checks
     # }
     # optional = true
     def initialize(name, config, optional = false)
-      super(name, optional, config[:hosts])
-      @type   = Rack::Healthcheck::Type::MESSAGING
+      super(name, Rack::Healthcheck::Type::MESSAGING, optional, config[:hosts])
       @config = config
     end
 

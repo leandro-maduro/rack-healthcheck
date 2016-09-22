@@ -11,8 +11,7 @@ module Rack::Healthcheck::Checks
     # optional = false
     # url = "mymongodb.com"
     def initialize(name, optional = false, url = nil)
-      super(name, optional, url)
-      @type = Rack::Healthcheck::Type::DATABASE
+      super(name, Rack::Healthcheck::Type::DATABASE, optional, url)
     end
 
     private
