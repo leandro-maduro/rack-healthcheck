@@ -1,12 +1,12 @@
 require "spec_helper"
 
-describe Rack::Healthcheck::Actions::LoadBalancerCheck do
+describe Rack::Healthcheck::Actions::LoadBalancer do
   describe ".new" do
     describe "with invalid request method" do
       subject { described_class.new("/path", "PATH") }
 
       it "raises InvalidRequestMethod exception" do
-        expect{subject}.to raise_error(Rack::Healthcheck::Actions::BaseCheck::InvalidRequestMethod, "Method not allowed")
+        expect{subject}.to raise_error(Rack::Healthcheck::Actions::Base::InvalidRequestMethod, "Method not allowed")
       end
     end
   end
@@ -24,7 +24,7 @@ describe Rack::Healthcheck::Actions::LoadBalancerCheck do
       subject(:check) { described_class.new("/healthcheck", "get") }
 
       before do
-        Rack::Healthcheck::Actions::LoadBalancerCheck.status = Rack::Healthcheck::Actions::LoadBalancerCheck::DEAD
+        Rack::Healthcheck::Actions::LoadBalancer.status = Rack::Healthcheck::Actions::LoadBalancer::DEAD
       end
 
       it 'returns DEAD' do
@@ -38,7 +38,7 @@ describe Rack::Healthcheck::Actions::LoadBalancerCheck do
     subject(:check) { described_class.new("/healthcheck", "post") }
 
     before(:each) do
-      Rack::Healthcheck::Actions::LoadBalancerCheck.status = Rack::Healthcheck::Actions::LoadBalancerCheck::DEAD
+      Rack::Healthcheck::Actions::LoadBalancer.status = Rack::Healthcheck::Actions::LoadBalancer::DEAD
     end
 
     it 'returns LIVE' do
@@ -48,7 +48,7 @@ describe Rack::Healthcheck::Actions::LoadBalancerCheck do
     it 'changes variable value to LIVE' do
       check.post
 
-      expect(Rack::Healthcheck::Actions::LoadBalancerCheck.status).to eq(Rack::Healthcheck::Actions::LoadBalancerCheck::LIVE)
+      expect(Rack::Healthcheck::Actions::LoadBalancer.status).to eq(Rack::Healthcheck::Actions::LoadBalancer::LIVE)
     end
   end
 
@@ -56,7 +56,7 @@ describe Rack::Healthcheck::Actions::LoadBalancerCheck do
     subject(:check) { described_class.new("/healthcheck", "delete") }
 
     before(:each) do
-      Rack::Healthcheck::Actions::LoadBalancerCheck.status = Rack::Healthcheck::Actions::LoadBalancerCheck::LIVE
+      Rack::Healthcheck::Actions::LoadBalancer.status = Rack::Healthcheck::Actions::LoadBalancer::LIVE
     end
 
     it 'returns DEAD' do
@@ -65,8 +65,8 @@ describe Rack::Healthcheck::Actions::LoadBalancerCheck do
 
     it 'changes variable value to DEAD' do
       check.delete
-      
-      expect(Rack::Healthcheck::Actions::LoadBalancerCheck.status).to eq(Rack::Healthcheck::Actions::LoadBalancerCheck::DEAD)
+
+      expect(Rack::Healthcheck::Actions::LoadBalancer.status).to eq(Rack::Healthcheck::Actions::LoadBalancer::DEAD)
     end
   end
 end

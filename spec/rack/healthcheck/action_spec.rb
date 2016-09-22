@@ -10,11 +10,11 @@ describe Rack::Healthcheck::Action do
 
       describe "with valid path_info" do
         it "returns a new instance of LoadBalancerCheck" do
-          expect(described_class.get(load_balancer_path, request_method)).to be_a(Rack::Healthcheck::Actions::LoadBalancerCheck)
+          expect(described_class.get(load_balancer_path, request_method)).to be_a(Rack::Healthcheck::Actions::LoadBalancer)
         end
 
         it "returns a new instance of CompleteCheck" do
-          expect(described_class.get(complete_path, request_method)).to be_a(Rack::Healthcheck::Actions::CompleteCheck)
+          expect(described_class.get(complete_path, request_method)).to be_a(Rack::Healthcheck::Actions::Complete)
         end
       end
 

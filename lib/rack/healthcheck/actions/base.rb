@@ -1,7 +1,7 @@
 module Rack
   module Healthcheck
     module Actions
-      class BaseCheck
+      class Base
         class InvalidRequestMethod < Exception; end;
 
         VALID_REQUEST_METHODS = [:get].freeze

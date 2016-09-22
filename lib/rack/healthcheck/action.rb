@@ -1,5 +1,5 @@
-require "rack/healthcheck/actions/load_balancer_check"
-require "rack/healthcheck/actions/complete_check"
+require "rack/healthcheck/actions/load_balancer"
+require "rack/healthcheck/actions/complete"
 
 module Rack
   module Healthcheck
@@ -20,8 +20,8 @@ module Rack
         def available_actions
           route = @mount_at.gsub(/^\//, "")
           {
-            "/#{route}"           => Rack::Healthcheck::Actions::LoadBalancerCheck,
-            "/#{route}/complete"  => Rack::Healthcheck::Actions::CompleteCheck,
+            "/#{route}"           => Rack::Healthcheck::Actions::LoadBalancer,
+            "/#{route}/complete"  => Rack::Healthcheck::Actions::Complete
           }
         end
       end

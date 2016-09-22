@@ -1,9 +1,9 @@
-require "rack/healthcheck/actions/base_check"
+require "rack/healthcheck/actions/base"
 
 module Rack
   module Healthcheck
     module Actions
-      class LoadBalancerCheck < BaseCheck
+      class LoadBalancer < Base
         LIVE = "LIVE"
         DEAD = "DEAD"
         VALID_REQUEST_METHODS = [:get, :post, :delete].freeze
