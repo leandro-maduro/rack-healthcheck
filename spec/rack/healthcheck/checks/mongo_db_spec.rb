@@ -6,8 +6,8 @@ module Mongoid
   end
 end
 
-describe Rack::Healthcheck::Checks::MongoDb do
-  let(:mongo_check) { Rack::Healthcheck::Checks::MongoDb.new("name") }
+describe Rack::Healthcheck::Checks::MongoDB do
+  let(:mongo_check) { described_class.new("name") }
 
   describe ".new" do
     it "sets type as DATABASE" do

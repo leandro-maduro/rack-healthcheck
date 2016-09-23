@@ -2,7 +2,7 @@ require "rack/healthcheck/checks/base"
 require "rack/healthcheck/type"
 
 module Rack::Healthcheck::Checks
-  class MongoDb < Base
+  class MongoDB < Base
     # @param name [String]
     # @param optional [Boolean] Flag used to inform if this service is optional
     # @param url [String] Used only to display the url service in json response
