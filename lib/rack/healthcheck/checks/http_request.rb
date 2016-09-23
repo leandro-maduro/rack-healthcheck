@@ -4,7 +4,7 @@ require "uri"
 require "net/http"
 
 module Rack::Healthcheck::Checks
-  class HttpRequest < Base
+  class HTTPRequest < Base
     class InvalidURL < Exception; end;
 
     attr_reader :config

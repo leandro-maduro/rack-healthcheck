@@ -1,7 +1,7 @@
 require 'spec_helper'
 require "rack/healthcheck/type"
 
-describe Rack::Healthcheck::Checks::HttpRequest do
+describe Rack::Healthcheck::Checks::HTTPRequest do
   let(:config) do
     {
       url: "http://localhost.com",
@@ -9,7 +9,7 @@ describe Rack::Healthcheck::Checks::HttpRequest do
       expected_result: "LIVE"
     }
   end
-  let(:http_request_check) { Rack::Healthcheck::Checks::HttpRequest.new("name", config) }
+  let(:http_request_check) { described_class.new("name", config) }
 
   describe ".new" do
     it "sets type as INTERNAL_SERVICE" do
