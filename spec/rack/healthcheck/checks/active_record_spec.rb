@@ -7,7 +7,7 @@ module ActiveRecord
 end
 
 describe Rack::Healthcheck::Checks::ActiveRecord do
-  let(:active_record_check) { Rack::Healthcheck::Checks::ActiveRecord.new("name") }
+  let(:active_record_check) { described_class.new("name") }
 
   describe ".new" do
     it "sets type as DATABASE" do

@@ -8,7 +8,7 @@ describe Rack::Healthcheck::Checks::Redis do
       password: 6379,
     }
   end
-  let(:redis_check) { Rack::Healthcheck::Checks::Redis.new("name", config) }
+  let(:redis_check) { described_class.new("name", config) }
 
   before(:each) do
     redis = Class.new
