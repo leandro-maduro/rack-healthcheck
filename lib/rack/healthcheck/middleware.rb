@@ -13,7 +13,7 @@ module Rack::Healthcheck
 
       action = Rack::Healthcheck::Action.get(path, request_method)
       action.send(request_method.downcase)
-    rescue Rack::Healthcheck::Action::InvalidAction, Rack::Healthcheck::Actions::BaseCheck::InvalidRequestMethod
+    rescue Rack::Healthcheck::Action::InvalidAction, Rack::Healthcheck::Actions::Base::InvalidRequestMethod
       @app.call(env)
     end
   end
