@@ -1,7 +1,7 @@
 require 'spec_helper'
 require "rack/healthcheck/type"
 
-describe Rack::Healthcheck::Checks::RabbitMq do
+describe Rack::Healthcheck::Checks::RabbitMQ do
   let(:config) do
     {
       hosts:  ["localhost"],
@@ -10,7 +10,7 @@ describe Rack::Healthcheck::Checks::RabbitMq do
       pass:   "guest"
     }
   end
-  let(:rabbit_check) { Rack::Healthcheck::Checks::RabbitMq.new("name", config) }
+  let(:rabbit_check) { described_class.new("name", config) }
 
   before(:each) do
     bunny = Class.new

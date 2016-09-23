@@ -2,7 +2,7 @@ require "rack/healthcheck/checks/base"
 require "rack/healthcheck/type"
 
 module Rack::Healthcheck::Checks
-  class RabbitMq < Base
+  class RabbitMQ < Base
     attr_reader :config
 
     # @param name [String]
