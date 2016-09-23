@@ -15,19 +15,6 @@ describe Rack::Healthcheck::Checks::HTTPRequest do
     it "sets type as INTERNAL_SERVICE" do
       expect(http_request_check.type).to eq(Rack::Healthcheck::Type::INTERNAL_SERVICE)
     end
-
-    describe "when an invalid type is informed" do
-      let(:config) do
-        {
-          url: "http://localhost.com",
-          expected_result: "LIVE"
-        }
-      end
-
-      it "raises Rack::Healthcheck::Checks::Base::InvalidType exception" do
-        expect{http_request_check}.to raise_error(Rack::Healthcheck::Checks::Base::InvalidType)
-      end
-    end
   end
 
   describe "#run" do
