@@ -4,8 +4,10 @@ require "rack/healthcheck/type"
 describe Rack::Healthcheck::Checks::Base do
   let(:name) { "name" }
   let(:type) { Rack::Healthcheck::Type::DATABASE }
+  let(:optional) { false }
+  let(:url) { "http://some_url" }
 
-  subject(:base_check) { described_class.new(name, type) }
+  subject(:base_check) { described_class.new(name, type, optional, url) }
 
   describe ".new" do
     describe "when an invalid type is informed" do
@@ -19,7 +21,7 @@ describe Rack::Healthcheck::Checks::Base do
 
   describe "#to_hash" do
     it "returns only filled attributes" do
-      expect(base_check.to_hash.keys).to contain_exactly(:name, :type, :optional)
+      expect(base_check.to_hash.keys).to contain_exactly(:name, :type, :optional, :url)
     end
   end
 
