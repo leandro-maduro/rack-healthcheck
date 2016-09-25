@@ -2,6 +2,7 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'coveralls'
 require 'simplecov'
 require 'pry'
+require 'timecop'
 
 Coveralls.wear!
 
