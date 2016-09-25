@@ -10,22 +10,21 @@ module Rack::Healthcheck::Checks
     attr_reader :config
 
     # @param name [String]
-    # @param config [Hash<Symbol,Object>]
-    # @param optional [Boolean] Flag used to inform if this service is optional
+    # @param config [Hash<Symbol, Object>] Hash with configs
     # @example
     # name = Ceph or Another system
     # config = {
-    #   url: localhost
-    #   headers: {"Host" => "something"}
-    #   service_type: "INTERNAL_SERVICE"
-    #   expected_result: "LIVE"
+    #   url: localhost,
+    #   headers: {"Host" => "something"},
+    #   service_type: "INTERNAL_SERVICE",
+    #   expected_result: "LIVE",
+    #   optional: true
     # }
-    # optional = true
     # @see Rack::Healthcheck::Type
-    def initialize(name, config, optional = false)
+    def initialize(name, config)
       raise InvalidURL.new("Expected :url to be a http or https endpoint") if config[:url].match(/^(http:\/\/|https:\/\/)/).nil?
 
-      super(name, config[:service_type], optional, config[:url])
+      super(name, config[:service_type], config[:optional], config[:url])
       @config = config
     end
 

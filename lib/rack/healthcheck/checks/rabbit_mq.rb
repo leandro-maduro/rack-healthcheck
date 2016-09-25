@@ -6,19 +6,18 @@ module Rack::Healthcheck::Checks
     attr_reader :config
 
     # @param name [String]
-    # @param config [Hash<Symbol,String>]
-    # @param optional [Boolean] Flag used to inform if this service is optional
+    # @param config [Hash<Symbol,Object>] Hash with configs
     # @example
     # name = RabbitMQ
     # config = {
-    #   hosts: [localhost]
-    #   port: 5672
-    #   user: guest
-    #   pass: guest
+    #   hosts: [localhost],
+    #   port: 5672,
+    #   user: guest,
+    #   pass: guest,
+    #   optional: true
     # }
-    # optional = true
-    def initialize(name, config, optional = false)
-      super(name, Rack::Healthcheck::Type::MESSAGING, optional, config[:hosts])
+    def initialize(name, config)
+      super(name, Rack::Healthcheck::Type::MESSAGING, config[:optional], config[:hosts])
       @config = config
     end
 

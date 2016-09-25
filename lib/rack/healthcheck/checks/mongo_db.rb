@@ -4,14 +4,15 @@ require "rack/healthcheck/type"
 module Rack::Healthcheck::Checks
   class MongoDB < Base
     # @param name [String]
-    # @param optional [Boolean] Flag used to inform if this service is optional
-    # @param url [String] Used only to display the url service in json response
+    # @param config [Hash<Symbol, Object>] Hash with optional configs
     # @example
     # name = Database
-    # optional = false
-    # url = "mymongodb.com"
-    def initialize(name, optional = false, url = nil)
-      super(name, Rack::Healthcheck::Type::DATABASE, optional, url)
+    # config {
+    #   optional: false,
+    #   url: "mymongodb.com"
+    # }
+    def initialize(name, config = {})
+      super(name, Rack::Healthcheck::Type::DATABASE, config[:optional], config[:url])
     end
 
     private

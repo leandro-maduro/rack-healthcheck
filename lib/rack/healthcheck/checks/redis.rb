@@ -6,17 +6,17 @@ module Rack::Healthcheck::Checks
     attr_reader :config
 
     # @param name [String]
-    # @param config [Hash<Symbol,String>]
+    # @param config [Hash<Symbol,String>] Hash with configs
     # @param optional [Boolean] Flag used to inform if this service is optional
     # @example
     # name = Redis
     # config = {
     #   url: "redis://localhost:6379",
-    #   password: "pass"
+    #   password: "pass",
+    #   optional: true
     # }
-    # optional = true
-    def initialize(name, config, optional = false)
-      super(name, Rack::Healthcheck::Type::CACHE, optional, config[:url])
+    def initialize(name, config)
+      super(name, Rack::Healthcheck::Type::CACHE, config[:optional], config[:url])
       @config = config
     end
 
