@@ -20,6 +20,21 @@ module Rack::Healthcheck::Checks
       @elapsed_time = Time.now - start
     end
 
+    def to_hash
+      {
+        name: name,
+        type: type,
+        status: status,
+        optional: optional,
+        time: elapsed_time,
+        url: url
+      }.reject{ |key, value| value.nil? }
+    end
+
+    def keep_in_pool?
+      (!optional && status == true) || optional
+    end
+
     private
 
     def check
