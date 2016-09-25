@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/downgba/rack-healthcheck.svg?branch=master)](https://travis-ci.org/downgba/rack-healthcheck)
+[![Coverage Status](https://coveralls.io/repos/github/downgba/rack-healthcheck/badge.svg?branch=master)](https://coveralls.io/github/downgba/rack-healthcheck?branch=master)
+
 # Rack::Healthcheck
 
 Is a middleware that verifies if your app and all resources that it needs is available.
