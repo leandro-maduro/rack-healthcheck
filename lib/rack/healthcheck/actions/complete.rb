@@ -1,3 +1,4 @@
+require "json"
 require "rack/healthcheck/actions/base"
 require "rack/healthcheck/checks/active_record"
 require "rack/healthcheck/checks/mongo_db"
