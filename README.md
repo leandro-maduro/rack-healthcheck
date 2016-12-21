@@ -3,7 +3,7 @@
 
 # Rack::Healthcheck
 
-Is a middleware that verifies if your app and all resources that it needs is available.
+Is a middleware that verifies if your app and all resources that it needs are available.
 
 ## Installation
 
