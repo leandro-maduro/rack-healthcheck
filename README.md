@@ -1,3 +1,4 @@
+[![Gem Version](https://badge.fury.io/rb/rack-healthcheck.svg)](https://badge.fury.io/rb/rack-healthcheck)
 [![Build Status](https://travis-ci.org/downgba/rack-healthcheck.svg?branch=master)](https://travis-ci.org/downgba/rack-healthcheck)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b1e9fec230d987b04f29/test_coverage)](https://codeclimate.com/github/downgba/rack-healthcheck/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/b1e9fec230d987b04f29/maintainability)](https://codeclimate.com/github/downgba/rack-healthcheck/maintainability)
