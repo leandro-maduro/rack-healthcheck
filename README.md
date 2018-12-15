@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/downgba/rack-healthcheck.svg?branch=master)](https://travis-ci.org/downgba/rack-healthcheck)
-[![Coverage Status](https://coveralls.io/repos/github/downgba/rack-healthcheck/badge.svg?branch=master)](https://coveralls.io/github/downgba/rack-healthcheck?branch=master)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/b1e9fec230d987b04f29/test_coverage)](https://codeclimate.com/github/downgba/rack-healthcheck/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/b1e9fec230d987b04f29/maintainability)](https://codeclimate.com/github/downgba/rack-healthcheck/maintainability)
 
 # Rack::Healthcheck
 
