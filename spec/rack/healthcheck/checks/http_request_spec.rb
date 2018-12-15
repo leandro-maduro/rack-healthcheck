@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 require "rack/healthcheck/type"
 
 describe Rack::Healthcheck::Checks::HTTPRequest do
@@ -18,35 +18,39 @@ describe Rack::Healthcheck::Checks::HTTPRequest do
   end
 
   describe "#run" do
-    let(:response) { double }
-
     subject(:run_it) { http_request_check.run }
 
+    let(:response) { double(:response, body: body) }
+    let(:body) { "LIVE" }
+
     before(:each) do
-      allow_any_instance_of(Net::HTTP).to receive(:get).with(any_args).and_return(response)
+      allow_any_instance_of(Net::HTTP).to receive(:get).with(any_args) { response }
     end
 
-    describe "when server is available and returns the expected result" do
+    context "when server is available and returns the expected result" do
       it "sets status to true" do
-        allow(response).to receive(:body).and_return("LIVE")
         run_it
 
         expect(http_request_check.status).to be_truthy
       end
     end
 
-    describe "when server is available and doen't return the expected result" do
+    context "when server is available and doen't return the expected result" do
+      let(:body) { "something" }
+
       it "sets status to false" do
-        allow(response).to receive(:body).and_return("something")
         run_it
 
         expect(http_request_check.status).to be_falsy
       end
     end
 
-    describe "when server is down" do
+    context "when server is down" do
+      before do
+        allow(response).to receive(:body).and_raise(StandardError)
+      end
+
       it "sets status to false" do
-        allow(response).to receive(:body).and_raise(Exception)
         run_it
 
         expect(http_request_check.status).to be_falsy

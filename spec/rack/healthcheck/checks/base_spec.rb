@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 require "rack/healthcheck/type"
 
 describe Rack::Healthcheck::Checks::Base do
@@ -10,11 +10,11 @@ describe Rack::Healthcheck::Checks::Base do
   subject(:base_check) { described_class.new(name, type, optional, url) }
 
   describe ".new" do
-    describe "when an invalid type is informed" do
+    context "when an invalid type is informed" do
       let(:type) { "type" }
 
       it "raises Rack::Healthcheck::Checks::Base::InvalidType exception" do
-        expect{ base_check }.to raise_error(Rack::Healthcheck::Checks::Base::InvalidType)
+        expect { base_check }.to raise_error(Rack::Healthcheck::Checks::Base::InvalidType)
       end
     end
   end
@@ -26,49 +26,48 @@ describe Rack::Healthcheck::Checks::Base do
   end
 
   describe "#keep_in_pool?" do
-    describe "when optional is true" do
+    context "when optional is true" do
       before(:each) do
         base_check.optional = true
       end
 
-      describe "when status is true" do
-        it 'returns true' do
-          allow(base_check).to receive(:status).and_return(true)
-
-          expect(base_check.keep_in_pool?).to be_truthy
+      context "when status is true" do
+        before do
+          allow(base_check).to receive(:status) { true }
         end
+
+        it { expect(base_check.keep_in_pool?).to be_truthy }
       end
 
-      describe "when status is false" do
-        it 'returns true' do
-          allow(base_check).to receive(:status).and_return(false)
-
-          expect(base_check.keep_in_pool?).to be_truthy
+      context "when status is false" do
+        before do
+          allow(base_check).to receive(:status) { false }
         end
+
+        it { expect(base_check.keep_in_pool?).to be_truthy }
       end
     end
 
-    describe "when optional is false" do
+    context "when optional is false" do
       before(:each) do
         base_check.optional = false
       end
 
-      describe "when status is true" do
-        it 'returns true' do
-          allow(base_check).to receive(:status).and_return(true)
-
-          expect(base_check.keep_in_pool?).to be_truthy
+      context "when status is true" do
+        before do
+          allow(base_check).to receive(:status) { true }
         end
+
+        it { expect(base_check.keep_in_pool?).to be_truthy }
       end
 
-      describe "when status is false" do
-        it 'returns false' do
-          allow(base_check).to receive(:status).and_return(false)
-
-          expect(base_check.keep_in_pool?).to be_falsy
+      context "when status is false" do
+        before do
+          allow(base_check).to receive(:status) { false }
         end
-      end
 
+        it { expect(base_check.keep_in_pool?).to be_falsy }
+      end
     end
   end
 end
