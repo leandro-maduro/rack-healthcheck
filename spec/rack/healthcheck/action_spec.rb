@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Rack::Healthcheck::Action do
   describe ".get" do
@@ -8,7 +8,7 @@ describe Rack::Healthcheck::Action do
       let(:load_balancer_path) { "/healthcheck" }
       let(:complete_path) { "/healthcheck/complete" }
 
-      describe "with valid path_info" do
+      context "with valid path_info" do
         it "returns a new instance of LoadBalancerCheck" do
           expect(described_class.get(load_balancer_path, request_method)).to be_a(Rack::Healthcheck::Actions::LoadBalancer)
         end
@@ -18,9 +18,9 @@ describe Rack::Healthcheck::Action do
         end
       end
 
-      describe "with invalid path_info" do
+      context "with invalid path_info" do
         it "raises Rack::Healthcheck::Action::InvalidAction exception" do
-          expect{ described_class.get("bla", request_method) }.to raise_error(Rack::Healthcheck::Action::InvalidAction, "Unknown action")
+          expect { described_class.get("bla", request_method) }.to raise_error(Rack::Healthcheck::Action::InvalidAction, "Unknown action")
         end
       end
     end

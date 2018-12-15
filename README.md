@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/downgba/rack-healthcheck.svg?branch=master)](https://travis-ci.org/downgba/rack-healthcheck)
-[![Coverage Status](https://coveralls.io/repos/github/downgba/rack-healthcheck/badge.svg?branch=master)](https://coveralls.io/github/downgba/rack-healthcheck?branch=master)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/b1e9fec230d987b04f29/test_coverage)](https://codeclimate.com/github/downgba/rack-healthcheck/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/b1e9fec230d987b04f29/maintainability)](https://codeclimate.com/github/downgba/rack-healthcheck/maintainability)
 
 # Rack::Healthcheck
 
@@ -65,7 +66,7 @@ Rack::Healthcheck.configure do |config|
 end
 ```
 
-##### Available checks   
+##### Available checks
 
 * Rack::Healthcheck::Checks::ActiveRecord.new(name, config = {})
 * Rack::Healthcheck::Checks::MongoDB.new(name, config = {})
@@ -73,7 +74,7 @@ end
 * Rack::Healthcheck::Checks::Redis.new(name, config = {})
 * Rack::Healthcheck::Checks::HTTPRequest.new(name, config = {})
 
-You can inform if one of your checks is optional, so this check will be disregarded in final result.   
+You can inform if one of your checks is optional, so this check will be disregarded in final result.
 To do that you just need to pass a hash with `:optional` key.
 
 ```ruby
@@ -87,7 +88,7 @@ Rack::Healthcheck::Checks::ActiveRecord.new("Test", {optional: true, url: "http:
 ```
 ### Routes
 
-By default this gem creates two routes `/healthcheck` and `/healthcheck/complete`.   
+By default this gem creates two routes `/healthcheck` and `/healthcheck/complete`.
 
 The `/healthcheck` route doesn't verify the services used by application. This is the fastest way to tell to load balancer if it should or not keep the machine in the pool.
 These are the available HTTP methods for this route:
@@ -96,7 +97,7 @@ These are the available HTTP methods for this route:
 * POST -> Changes the current status to LIVE
 * DELETE -> Changes the current status to DEAD
 
-The `/healthcheck/complete` performs all configured checks and returns a JSON with a lot of informations (elapsed time, status for each service, global status considering only required services).
+The `/healthcheck/complete` performs all configured checks and returns a JSON with a lot of information (elapsed time, status for each service, global status considering only required services).
 Example:
 ```json
 {

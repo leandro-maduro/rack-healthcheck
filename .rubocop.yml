@@ -1,0 +1,15 @@
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Metrics/BlockLength:
+  ExcludedMethods:
+    - describe
+
+Metrics/LineLength:
+  Max: 150
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 30

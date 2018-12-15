@@ -4,8 +4,8 @@ describe Rack::Healthcheck::Middleware do
   let(:app) { double }
   let(:env) do
     {
-      "PATH_INFO"       => path,
-      "REQUEST_METHOD"  => request_method
+      "PATH_INFO" => path,
+      "REQUEST_METHOD" => request_method
     }
   end
 
@@ -15,7 +15,7 @@ describe Rack::Healthcheck::Middleware do
     let(:path) { "/healthcheck" }
     let(:request_method) { "GET" }
 
-    describe "when is not a healthcheck request" do
+    context "when is not a healthcheck request" do
       let(:path) { "/path" }
 
       it "sends request to app" do
@@ -26,7 +26,7 @@ describe Rack::Healthcheck::Middleware do
       end
     end
 
-    describe "when is an invalid request method" do
+    context "when is an invalid request method" do
       let(:request_method) { "PATH" }
 
       it "sends request to app" do
@@ -37,7 +37,7 @@ describe Rack::Healthcheck::Middleware do
       end
     end
 
-    describe "when is a healthcheck request" do
+    context "when is a healthcheck request" do
       let(:action) { Rack::Healthcheck::Actions::LoadBalancer.new(path, request_method) }
       it "performs the checks" do
         allow(Rack::Healthcheck::Action).to receive(:get).and_return(action)

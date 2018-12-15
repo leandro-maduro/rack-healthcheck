@@ -1,22 +1,25 @@
-require 'spec_helper'
+require "spec_helper"
 require "rack/healthcheck/type"
 
 describe Rack::Healthcheck::Checks::RabbitMQ do
+  class Bunny
+    def initialize(url); end
+
+    def start; end
+
+    def close; end
+  end
+
   let(:config) do
     {
-      hosts:  ["localhost"],
-      port:   5672,
-      user:   "guest",
-      pass:   "guest"
+      hosts: ["localhost"],
+      port: 5672,
+      user: "guest",
+      pass: "guest"
     }
   end
-  let(:rabbit_check) { described_class.new("name", config) }
 
-  before(:each) do
-    bunny = Class.new
-    bunny.class_eval { def initialize(url); end; def start; end; def close; end}
-    stub_const("Bunny", bunny)
-  end
+  let(:rabbit_check) { described_class.new("name", config) }
 
   describe ".new" do
     it "sets type as MESSAGING" do
@@ -27,7 +30,7 @@ describe Rack::Healthcheck::Checks::RabbitMQ do
   describe "#run" do
     subject(:run_it) { rabbit_check.run }
 
-    describe "when rabbit server is available" do
+    context "when rabbit server is available" do
       it "sets status to true" do
         run_it
 
@@ -35,9 +38,12 @@ describe Rack::Healthcheck::Checks::RabbitMQ do
       end
     end
 
-    describe "when rabbit server is down" do
+    context "when rabbit server is down" do
+      before do
+        allow_any_instance_of(Bunny).to receive(:start).and_raise(StandardError)
+      end
+
       it "sets status to false" do
-        allow_any_instance_of(Bunny).to receive(:start).and_raise(Exception)
         run_it
 
         expect(rabbit_check.status).to be_falsy

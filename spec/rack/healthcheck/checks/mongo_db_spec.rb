@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 require "rack/healthcheck/type"
 
 module Mongoid
@@ -18,21 +18,27 @@ describe Rack::Healthcheck::Checks::MongoDB do
   describe "#run" do
     subject(:run_it) { mongo_check.run }
 
-    describe "when database is up" do
+    context "when database is up" do
       let(:connection) { double }
 
+      before do
+        allow(connection).to receive(:command) { { "db" => "test" } }
+        allow(Mongoid::Sessions).to receive(:with_name).with(any_args) { connection }
+      end
+
       it "sets status to true" do
-        allow(connection).to receive(:command).and_return({"db" => "test"})
-        allow(Mongoid::Sessions).to receive(:with_name).with(any_args).and_return(connection)
         run_it
 
         expect(mongo_check.status).to be_truthy
       end
     end
 
-    describe "when database is down" do
+    context "when database is down" do
+      before do
+        allow(Mongoid::Sessions).to receive(:with_name).and_raise(StandardError)
+      end
+
       it "sets status to false" do
-        allow(Mongoid::Sessions).to receive(:with_name).and_raise(Exception)
         run_it
 
         expect(mongo_check.status).to be_falsy

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 require "rack/healthcheck/type"
 
 module ActiveRecord
@@ -18,18 +18,24 @@ describe Rack::Healthcheck::Checks::ActiveRecord do
   describe "#run" do
     subject(:run_it) { active_record_check.run }
 
-    describe "when database is up" do
+    context "when database is up" do
+      before do
+        allow(ActiveRecord::Migrator).to receive(:current_version) { "1" }
+      end
+
       it "sets status to true" do
-        allow(ActiveRecord::Migrator).to receive(:current_version).and_return("1")
         run_it
 
         expect(active_record_check.status).to be_truthy
       end
     end
 
-    describe "when database is down" do
+    context "when database is down" do
+      before do
+        allow(ActiveRecord::Migrator).to receive(:current_version).and_raise(StandardError)
+      end
+
       it "sets status to false" do
-        allow(ActiveRecord::Migrator).to receive(:current_version).and_raise(Exception)
         run_it
 
         expect(active_record_check.status).to be_falsy
