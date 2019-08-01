@@ -31,6 +31,13 @@ Or install it yourself as:
 config.middleware.use Rack::Healthcheck::Middleware
 ```
 
+This may, depending on setup need a position specified. If you see Rack errors in your tests, or elsewhere, try this.
+
+```ruby
+# config/application.rb
+config.middleware.insert_before 0, Rack::Healthcheck::Middleware
+```
+
 ###### Sinatra
 ```ruby
 # config.ru
