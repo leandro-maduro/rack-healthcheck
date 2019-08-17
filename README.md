@@ -31,6 +31,22 @@ Or install it yourself as:
 config.middleware.use Rack::Healthcheck::Middleware
 ```
 
+This may, depending on setup need a position specified. If you see Rack errors in your tests, or elsewhere, try this.
+
+```ruby
+# config/application.rb
+config.middleware.insert_before 0, Rack::Healthcheck::Middleware
+```
+
+If it still doesn't work, some users are positionally specifying that the middleware come before another by class name.
+
+```ruby
+# config/application.rb
+config.middleware.insert_before ActiveRecord::Migration::CheckPending, Rack::Healthcheck::Middleware
+```
+
+This name may change depending on the framework & version you use this with, and may not be available which is why absolute position is provided above.
+
 ###### Sinatra
 ```ruby
 # config.ru
